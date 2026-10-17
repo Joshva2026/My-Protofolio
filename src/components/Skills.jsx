@@ -1,44 +1,16 @@
 import React, { useState } from 'react';
 import { skillCategories } from '../data/portfolioData';
 import { Figma } from './Icons';
-import {
-  Code2,
-  Cpu,
-  Brain,
-  Eye,
-  Camera,
-  BarChart2,
-  Database,
-  FileSpreadsheet,
-  PieChart,
-  LineChart,
-  Table,
-  Binary,
-  Layout,
-  Smartphone,
-  Palette,
-  Component,
-  Code,
-  FileCode,
-  Atom,
-  Server,
-  Globe,
-  Layers,
-  GitBranch,
-  Terminal,
-  Zap,
-  Flame,
-  BookOpen,
-  Send,
-  Sparkles,
-  Layers3
+import { 
+  Code, Layers, FileCode, Atom, Server, Globe, 
+  Code2, Cpu, Brain, Eye, Camera, Database,
+  Layout, Smartphone, Palette, Zap, GitBranch, Terminal 
 } from 'lucide-react';
 
 const iconMap = {
-  Code2, Cpu, Brain, Eye, Camera, BarChart2, Database, FileSpreadsheet,
-  PieChart, LineChart, Table, Binary, Figma, Layout, Smartphone, Palette,
-  Component, Code, FileCode, Atom, Server, Globe, Layers, GitBranch,
-  Terminal, Zap, Flame, BookOpen, Send
+  Code, Layers, FileCode, Atom, Server, Globe,
+  Code2, Cpu, Brain, Eye, Camera, Figma, Database,
+  Layout, Smartphone, Palette, Zap, GitBranch, Terminal
 };
 
 export default function Skills() {
@@ -49,102 +21,108 @@ export default function Skills() {
     : skillCategories.filter(cat => cat.id === selectedCategory);
 
   return (
-    <section id="skills" className="py-20 md:py-28 bg-[#FAF9F5] relative overflow-hidden">
-      {/* Decorative Orbs */}
-      <div className="absolute bottom-0 right-0 w-[450px] h-[450px] glow-orb glow-orb-indigo translate-y-24 translate-x-12"></div>
-      
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="skills" className="py-24 md:py-32 bg-[#FAF9FC] border-t border-[#1A1814]/10 relative overflow-hidden">
+      <div className="max-w-[1320px] mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EEF2FF] text-[#4F46E5] text-xs font-bold uppercase tracking-wider mb-3">
-              <Layers3 className="w-3.5 h-3.5" /> Technical Competencies
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 pb-8 border-b border-[#1A1814]/10">
+          <div className="space-y-4 max-w-2xl">
+            <div className="flex items-center gap-3">
+              <span className="w-6 h-0.5 bg-[#68529B] rounded-full"></span>
+              <span className="font-sans text-xs sm:text-sm font-semibold tracking-[0.2em] text-[#68529B] uppercase">
+                Skills &amp; Tools
+              </span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#18181B] tracking-tight">
-              Skills & Expertise
+
+            <h2 className="font-serif text-4xl sm:text-5xl lg:text-[56px] text-[#1A1814] leading-[1.05] tracking-tight">
+              The technical kit I reach for, <em className="italic text-[#4A4640] font-normal">day to day.</em>
             </h2>
-            <p className="mt-2 text-base text-[#4B5563] max-w-xl font-medium">
-              Organized into core practical domains without arbitrary percentage bars.
-            </p>
           </div>
 
           {/* Category Filter Pills */}
-          <div className="flex flex-wrap gap-1.5 p-1.5 bg-white rounded-2xl border border-[#EAE8E1] shadow-subtle max-w-full overflow-x-auto">
+          <div className="flex flex-wrap gap-1.5 p-1.5 bg-white rounded-full border border-[#1A1814]/10 shadow-2xs overflow-x-auto self-start md:self-auto">
             <button
               type="button"
               onClick={() => setSelectedCategory('all')}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all transition-spring cursor-pointer ${
+              className={`px-4 py-1.5 rounded-full text-xs font-sans font-semibold transition-all duration-200 cursor-pointer ${
                 selectedCategory === 'all'
-                  ? 'bg-[#4F46E5] text-white shadow-sm'
-                  : 'text-[#4B5563] hover:text-[#18181B] hover:bg-[#FAF9F5]'
+                  ? 'bg-[#68529B] text-white shadow-xs'
+                  : 'text-[#4A4640] hover:text-[#1A1814] hover:bg-black/[0.03]'
               }`}
             >
-              All Skills
+              All Tools
             </button>
             {skillCategories.map((cat) => (
               <button
                 key={cat.id}
                 type="button"
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all transition-spring cursor-pointer shrink-0 ${
+                className={`px-4 py-1.5 rounded-full text-xs font-sans font-semibold transition-all duration-200 cursor-pointer shrink-0 ${
                   selectedCategory === cat.id
-                    ? 'bg-[#4F46E5] text-white shadow-sm'
-                    : 'text-[#4B5563] hover:text-[#18181B] hover:bg-[#FAF9F5]'
+                    ? 'bg-[#68529B] text-white shadow-xs'
+                    : 'text-[#4A4640] hover:text-[#1A1814] hover:bg-black/[0.03]'
                 }`}
               >
-                {cat.category}
+                {cat.title}
               </button>
             ))}
           </div>
         </div>
 
-        {/* Categorized Skills Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredCategories.map((category) => (
+        {/* Categories Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+          {filteredCategories.map((cat) => (
             <div
-              key={category.id}
-              className="bg-white rounded-3xl border border-[#EAE8E1] p-6 sm:p-8 shadow-subtle hover-spring transition-spring flex flex-col justify-between"
+              key={cat.id}
+              className="p-8 sm:p-10 rounded-[24px] bg-white border border-[#1A1814]/10 hover:border-[#68529B]/30 hover:shadow-lg transition-all duration-300 flex flex-col justify-between group"
             >
               <div className="space-y-6">
                 
-                {/* Category Header */}
-                <div className="border-b border-[#EAE8E1] pb-4">
-                  <div className="flex items-center justify-between gap-4">
-                    <h3 className="text-base sm:text-lg font-black text-[#18181B]">
-                      {category.category}
-                    </h3>
-                    <span className="text-[10px] font-mono font-bold px-2 py-1 bg-[#EEF2FF] text-[#4F46E5] rounded-lg border border-[#4F46E5]/10 shrink-0">
-                      {category.skills.length} Items
+                {/* Header */}
+                <div className="flex items-start justify-between gap-4 border-b border-[#1A1814]/10 pb-5">
+                  <div>
+                    <span className="font-serif italic text-lg text-[#68529B]">
+                      {cat.category.split(' · ')[0]}
                     </span>
+                    <h3 className="font-sans font-bold text-2xl text-[#1A1814] mt-0.5 group-hover:text-[#68529B] transition-colors">
+                      {cat.title}
+                    </h3>
                   </div>
-                  <p className="text-xs text-[#6B7280] mt-1.5 leading-relaxed font-medium">
-                    {category.description}
-                  </p>
+
+                  <span className="font-mono text-xs font-semibold px-3 py-1 rounded-full bg-[#FAF9FC] border border-[#1A1814]/10 text-[#8A847B]">
+                    {cat.skills.length} Techs
+                  </span>
                 </div>
 
+                <p className="font-sans text-sm text-[#4A4640] leading-relaxed">
+                  {cat.description}
+                </p>
+
                 {/* Skill Chips */}
-                <div className="flex flex-wrap gap-2 pt-1">
-                  {category.skills.map((skill) => {
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                  {cat.skills.map((skill) => {
                     const IconComponent = iconMap[skill.icon] || Code;
                     return (
                       <div
                         key={skill.name}
-                        className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-[#FAF9F5] border border-[#EAE8E1] hover:border-[#4F46E5]/30 hover:bg-[#EEF2FF]/40 transition-all duration-300 text-xs font-semibold text-[#18181B] group shadow-2xs"
+                        className="flex items-center gap-3 p-3 rounded-xl bg-[#FAF9FC] border border-[#1A1814]/10 hover:border-[#68529B]/30 hover:bg-white hover:shadow-2xs transition-all duration-200 group/item"
                       >
-                        <IconComponent className="w-4 h-4 text-[#4F46E5] group-hover:scale-115 group-hover:rotate-6 transition-all duration-300" />
-                        <span>{skill.name}</span>
+                        <div className="w-8 h-8 rounded-lg bg-white border border-[#1A1814]/10 flex items-center justify-center text-[#68529B] shrink-0 group-hover/item:bg-[#68529B] group-hover/item:text-white transition-colors">
+                          <IconComponent className="w-4 h-4" />
+                        </div>
+                        <div>
+                          <div className="font-sans font-semibold text-xs sm:text-sm text-[#1A1814]">
+                            {skill.name}
+                          </div>
+                          <div className="font-mono text-[10px] text-[#8A847B]">
+                            {skill.level}
+                          </div>
+                        </div>
                       </div>
                     );
                   })}
                 </div>
 
-              </div>
-
-              {/* Bottom Subtle Badge */}
-              <div className="pt-4 mt-6 border-t border-[#EAE8E1] flex items-center justify-between text-[10px] text-[#6B7280] font-bold">
-                <span>Domain Focus</span>
-                <span className="font-mono text-[#4F46E5] font-black uppercase tracking-wider">Practical Application</span>
               </div>
             </div>
           ))}

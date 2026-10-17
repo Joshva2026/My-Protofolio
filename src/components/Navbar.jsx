@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { personalInfo } from '../data/portfolioData';
+import { Menu, X, Download, ArrowUpRight } from 'lucide-react';
 
 const navItems = [
   { label: 'About', href: '#about' },
-  { label: 'Skills', href: '#skills' },
+  { label: 'Numbers', href: '#by-the-numbers' },
+  { label: 'Experience', href: '#experience' },
   { label: 'Projects', href: '#projects' },
-  { label: 'Internship', href: '#internship' },
   { label: 'Education', href: '#education' },
-  { label: 'Certifications', href: '#certifications' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Reviews', href: '#reviews' },
+  { label: 'FAQ', href: '#faq' },
   { label: 'Contact', href: '#contact' },
 ];
 
@@ -28,7 +31,7 @@ export default function Navbar({ activeSection }) {
     setMobileMenuOpen(false);
     const element = document.querySelector(href);
     if (element) {
-      const offset = 80;
+      const offset = 90;
       const bodyRect = document.body.getBoundingClientRect().top;
       const elementRect = element.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
@@ -42,42 +45,40 @@ export default function Navbar({ activeSection }) {
   };
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-[#FAF9F5]/85 backdrop-blur-md border-b border-[#EAE8E1]/80 shadow-xs py-3'
-          : 'bg-transparent py-5'
-      }`}
-    >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
+    <header className="fixed top-0 left-0 right-0 z-50 pt-3 md:pt-5 px-4 sm:px-6 transition-all duration-300 pointer-events-none">
+      <div className="max-w-[1320px] mx-auto pointer-events-auto">
+        <div className={`framer-glass-nav rounded-full px-5 md:px-7 py-3 flex items-center justify-between transition-all duration-300 ${
+          isScrolled ? 'shadow-lg py-2.5 bg-[#FAF9FC]/90' : ''
+        }`}>
           
-          {/* Logo */}
+          {/* Logo in Instrument Serif */}
           <a
-            href="#"
-            className="flex items-center gap-2.5 text-lg font-bold text-[#18181B] tracking-tight group"
+            href="#hero"
+            onClick={(e) => handleNavClick(e, '#hero')}
+            className="flex items-center gap-1.5 text-xl sm:text-2xl font-serif tracking-tight select-none group"
           >
-            <div className="w-8 h-8 rounded-xl bg-[#4F46E5] text-white flex items-center justify-center font-mono text-xs font-black shadow-sm transition-all duration-300 group-hover:scale-105 group-hover:rotate-6">
-              JP
-            </div>
-            <span className="font-sans font-extrabold tracking-tight transition-colors duration-200 group-hover:text-[#4F46E5]">
-              Joshva<span className="text-[#4F46E5]">.</span>
+            <span className="text-[#1A1814] font-normal group-hover:text-[#68529B] transition-colors">
+              {personalInfo.firstName || 'Joshva'}
+            </span>
+            <span className="italic text-[#4A4640] group-hover:text-[#68529B] transition-colors">
+              {personalInfo.lastName || 'Priyan'}
             </span>
           </a>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1.5 bg-white/70 p-1 rounded-full border border-[#EAE8E1]/60 shadow-subtle backdrop-blur-md">
+          {/* Desktop Nav Items */}
+          <nav className="hidden lg:flex items-center gap-1">
             {navItems.map((item) => {
-              const isActive = activeSection === item.href.substring(1);
+              const targetId = item.href.replace('#', '');
+              const isActive = activeSection === targetId;
               return (
                 <a
                   key={item.label}
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300 transition-spring ${
+                  className={`px-3 py-1.5 rounded-full text-[13px] font-sans font-medium transition-all duration-200 ${
                     isActive
-                      ? 'bg-[#4F46E5] text-white shadow-sm'
-                      : 'text-[#4B5563] hover:text-[#18181B] hover:bg-[#FAF9F5]'
+                      ? 'text-[#1A1814] font-semibold bg-[#FAF9FC] shadow-2xs'
+                      : 'text-[#4A4640] hover:text-[#1A1814] hover:bg-black/[0.03]'
                   }`}
                 >
                   {item.label}
@@ -86,64 +87,58 @@ export default function Navbar({ activeSection }) {
             })}
           </nav>
 
-          {/* Desktop Contact CTA */}
-          <div className="hidden md:flex items-center gap-3">
+          {/* Action Button: Download Resume */}
+          <div className="flex items-center gap-2">
             <a
-              href="#contact"
-              onClick={(e) => handleNavClick(e, '#contact')}
-              className="inline-flex items-center gap-1.5 px-4.5 py-2 text-xs font-bold text-white bg-[#4F46E5] hover:bg-[#4338CA] rounded-xl transition-all shadow-sm hover:shadow-md transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer transition-spring"
+              href="/resume.pdf"
+              download="Joshva_Priyan_Resume.pdf"
+              className="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-xs sm:text-sm font-sans font-semibold text-white bg-[#68529B] hover:bg-[#584485] shadow-sm hover:shadow-md transition-all active:scale-98 select-none"
             >
-              <span>Get in Touch</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
+              <Download className="w-3.5 h-3.5" />
+              <span>Download CV</span>
             </a>
+
+            {/* Mobile Hamburger Button */}
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="lg:hidden p-2 text-[#1A1814] hover:bg-black/[0.05] rounded-full transition-colors ml-1 cursor-pointer"
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-xl text-[#18181B] hover:bg-white border border-[#EAE8E1]/80 shadow-subtle transition-all duration-200"
-            aria-label="Toggle Navigation Menu"
-          >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
         </div>
+
+        {/* Mobile Dropdown Menu */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden mt-2 p-4 framer-glass-nav rounded-3xl animate-in fade-in slide-in-from-top-4 duration-300 shadow-xl border border-white/80">
+            <nav className="flex flex-col gap-1.5 py-1">
+              {navItems.map((item) => {
+                const targetId = item.href.replace('#', '');
+                const isActive = activeSection === targetId;
+                return (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    onClick={(e) => handleNavClick(e, item.href)}
+                    className={`px-4 py-2.5 rounded-xl text-sm font-sans font-medium transition-colors flex items-center justify-between ${
+                      isActive
+                        ? 'text-[#68529B] bg-[#ECE7F4] font-semibold'
+                        : 'text-[#4A4640] hover:text-[#1A1814] hover:bg-black/[0.04]'
+                    }`}
+                  >
+                    <span>{item.label}</span>
+                    <ArrowUpRight className="w-4 h-4 opacity-40" />
+                  </a>
+                );
+              })}
+            </nav>
+          </div>
+        )}
+
       </div>
-
-      {/* Mobile Drawer Menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-white/95 backdrop-blur-lg border-b border-[#EAE8E1] px-4 pt-3 pb-6 shadow-lg animate-in slide-in-from-top-4 duration-300">
-          <div className="flex flex-col space-y-1.5">
-            {navItems.map((item) => {
-              const isActive = activeSection === item.href.substring(1);
-              return (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  onClick={(e) => handleNavClick(e, item.href)}
-                  className={`px-4.5 py-3 rounded-xl text-sm font-bold transition-all duration-200 ${
-                    isActive
-                      ? 'bg-[#EEF2FF] text-[#4F46E5] border-l-4 border-[#4F46E5]'
-                      : 'text-[#4B5563] hover:bg-[#FAF9F5] hover:text-[#18181B]'
-                  }`}
-                >
-                  {item.label}
-                </a>
-              );
-            })}
-            <div className="pt-3">
-              <a
-                href="#contact"
-                onClick={(e) => handleNavClick(e, '#contact')}
-                className="w-full inline-flex items-center justify-center gap-2 px-4.5 py-3 text-sm font-bold text-white bg-[#4F46E5] hover:bg-[#4338CA] rounded-xl transition-all shadow-sm active:scale-98 transition-spring"
-              >
-                <span>Get in Touch</span>
-                <ArrowUpRight className="w-4 h-4" />
-              </a>
-            </div>
-          </div>
-        </div>
-      )}
     </header>
   );
 }

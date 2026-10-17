@@ -1,6 +1,6 @@
 import React from 'react';
 import { certificationsPlaceholderData } from '../data/portfolioData';
-import { Award, Image, Plus, ExternalLink } from 'lucide-react';
+import { Award, Image, Plus } from 'lucide-react';
 
 export default function Certifications() {
   return (

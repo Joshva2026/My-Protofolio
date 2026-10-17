@@ -1,78 +1,91 @@
 import React from 'react';
 import { educationData } from '../data/portfolioData';
-import { GraduationCap, Calendar, CheckCircle2 } from 'lucide-react';
+import { GraduationCap } from 'lucide-react';
 
 export default function Education() {
   return (
-    <section id="education" className="py-20 md:py-28 bg-[#FAF9F5] relative overflow-hidden">
-      {/* Decorative Orbs */}
-      <div className="absolute top-[20%] right-0 w-[400px] h-[400px] glow-orb glow-orb-indigo translate-x-32"></div>
-
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="education" className="py-24 md:py-32 bg-[#FAF9FC] border-t border-[#1A1814]/10 relative overflow-hidden">
+      <div className="max-w-[1320px] mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         
         {/* Section Header */}
-        <div className="max-w-3xl mb-16">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EEF2FF] text-[#4F46E5] text-xs font-bold uppercase tracking-wider mb-3">
-            <GraduationCap className="w-3.5 h-3.5" /> Educational Background
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 pb-8 border-b border-[#1A1814]/10">
+          <div className="space-y-4 max-w-2xl">
+            <div className="flex items-center gap-3">
+              <span className="w-6 h-0.5 bg-[#68529B] rounded-full"></span>
+              <span className="font-sans text-xs sm:text-sm font-semibold tracking-[0.2em] text-[#68529B] uppercase">
+                Education &amp; Background
+              </span>
+            </div>
+
+            <h2 className="font-serif text-4xl sm:text-5xl lg:text-[56px] text-[#1A1814] leading-[1.05] tracking-tight">
+              Trained in core principles, learned by <em className="italic text-[#4A4640] font-normal">shipping.</em>
+            </h2>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#18181B] tracking-tight">
-            Education Journey
-          </h2>
-          <p className="mt-2 text-base text-[#4B5563] font-medium">
-            Academic qualifications in Information Technology and Computer Applications.
-          </p>
+
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#1A1814]/10 text-xs font-sans font-semibold text-[#68529B] shadow-2xs">
+            <span>{educationData.length} Academic Programs</span>
+          </div>
         </div>
 
-        {/* Clean Timeline Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {educationData.map((edu) => (
-            <div
-              key={edu.degree}
-              className="bg-white rounded-3xl border border-[#EAE8E1] p-6 sm:p-8 lg:p-10 shadow-subtle hover-spring transition-spring flex flex-col justify-between"
-            >
-              <div className="space-y-5">
-                
-                {/* Degree Header & Badge */}
-                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-                  <div className="space-y-2">
-                    <span className={`inline-block px-3 py-1 rounded-lg text-[10px] font-mono font-bold border shadow-2xs ${
-                      edu.status === 'Currently Pursuing'
-                        ? 'bg-[#EEF2FF] text-[#4F46E5] border-[#4F46E5]/15'
-                        : 'bg-[#F0FDF4] text-[#0D9488] border-[#0D9488]/15'
-                    }`}>
-                      {edu.status}
-                    </span>
-                    <h3 className="text-xl font-black text-[#18181B] leading-snug">
+        {/* 2-Column Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          
+          {/* Left Column Summary */}
+          <div className="lg:col-span-4 space-y-4">
+            <p className="font-sans text-base sm:text-lg text-[#4A4640] leading-relaxed">
+              Formal study in computer applications, system algorithms, databases, and full-stack software development.
+            </p>
+            <div className="p-5 rounded-2xl bg-[#ECE7F4]/60 border border-[#68529B]/15">
+              <div className="flex items-center gap-2 text-xs font-sans font-semibold text-[#68529B] uppercase tracking-wider">
+                <GraduationCap className="w-3.5 h-3.5" /> Academic Focus
+              </div>
+              <p className="font-sans text-xs text-[#4A4640] mt-1.5 leading-normal">
+                Department of Computer Applications — pursuing MCA with advanced coursework in algorithms, web technologies, and AI.
+              </p>
+            </div>
+          </div>
+
+          {/* Right Column: Degree Cards */}
+          <div className="lg:col-span-8 space-y-6">
+            {educationData.map((edu) => (
+              <div
+                key={edu.id}
+                className="p-8 rounded-2xl bg-white border border-[#1A1814]/10 hover:border-[#68529B]/30 hover:shadow-md transition-all duration-300 group"
+              >
+                <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-3">
+                  <div>
+                    <h3 className="font-sans font-bold text-xl sm:text-2xl text-[#1A1814] group-hover:text-[#68529B] transition-colors">
                       {edu.degree}
                     </h3>
-                    <p className="text-xs font-bold text-[#4B5563]">
+                    <div className="font-serif italic text-lg text-[#68529B] mt-0.5">
                       {edu.institution}
-                    </p>
+                    </div>
                   </div>
-                  
-                  {/* Period Tag */}
-                  <div className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#6B7280] shrink-0 bg-[#FAF9F5] px-3.5 py-1.5 rounded-xl border border-[#EAE8E1] shadow-2xs self-start sm:self-auto">
-                    <Calendar className="w-3.5 h-3.5 text-[#4F46E5]" />
-                    <span>{edu.period}</span>
-                  </div>
+
+                  <span className="font-mono text-xs font-semibold px-3 py-1 rounded-full bg-[#FAF9FC] border border-[#1A1814]/10 text-[#8A847B] self-start sm:self-auto">
+                    {edu.period}
+                  </span>
                 </div>
 
-                {/* Description */}
-                <p className="text-sm sm:text-base text-[#4B5563] leading-relaxed font-medium">
+                <p className="font-sans text-sm sm:text-base text-[#4A4640] leading-relaxed mb-6">
                   {edu.description}
                 </p>
 
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2 pt-2 border-t border-[#1A1814]/5">
+                  {edu.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-3 py-1 rounded-full bg-[#FAF9FC] border border-[#1A1814]/10 text-[11px] font-sans font-medium text-[#4A4640]"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
+            ))}
+          </div>
 
-              {/* Bottom Status Bar */}
-              <div className="pt-4 mt-6 border-t border-[#EAE8E1] flex items-center justify-between text-[10px] text-[#6B7280] font-bold">
-                <span>Academic Status</span>
-                <span className="font-mono text-[#18181B] font-black flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#0D9488]" /> {edu.status}
-                </span>
-              </div>
-            </div>
-          ))}
         </div>
 
       </div>
