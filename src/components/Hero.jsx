@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { personalInfo } from '../data/portfolioData';
 import { Github, Linkedin } from './Icons';
-import { Mail, FileText } from 'lucide-react';
+import { Mail, FileText, Play, X } from 'lucide-react';
 
 export default function Hero() {
+  const [isIntroOpen, setIsIntroOpen] = useState(false);
+
+  // Close the intro modal with Escape and lock background scroll while it is open
+  useEffect(() => {
+    if (!isIntroOpen) return;
+    const onKeyDown = (e) => e.key === 'Escape' && setIsIntroOpen(false);
+    document.addEventListener('keydown', onKeyDown);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [isIntroOpen]);
+
   return (
     <section id="hero" className="relative pt-36 pb-20 md:pt-48 md:pb-28 overflow-hidden min-h-[92vh] flex items-center bg-[#FAF9FC]">
       {/* Background delicate radial orb */}
@@ -90,6 +104,15 @@ export default function Hero() {
                 <FileText className="w-3.5 h-3.5 text-[#68529B]" />
                 <span>R&eacute;sum&eacute;</span>
               </a>
+
+              <button
+                type="button"
+                onClick={() => setIsIntroOpen(true)}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-[#1A1814]/15 text-[#1A1814] text-xs sm:text-[13px] font-sans font-medium hover:bg-[#FAF9FC] transition-all shadow-2xs hover:shadow-xs active:scale-98"
+              >
+                <Play className="w-3.5 h-3.5 text-[#68529B]" />
+                <span>Watch intro</span>
+              </button>
             </div>
 
           </div>
@@ -144,6 +167,39 @@ export default function Hero() {
 
         </div>
       </div>
+
+      {/* Intro video modal */}
+      {isIntroOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Portfolio intro video"
+          onClick={() => setIsIntroOpen(false)}
+        >
+          <div
+            className="relative w-full max-w-4xl rounded-2xl overflow-hidden bg-black shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setIsIntroOpen(false)}
+              aria-label="Close intro video"
+              className="absolute top-3 right-3 z-10 p-2 rounded-full bg-black/60 text-white hover:bg-black/80 transition-colors"
+            >
+              <X className="w-4 h-4" />
+            </button>
+            <video
+              src="/assets/intro/intro-with-details.mp4"
+              poster="/assets/intro/intro-poster.jpg"
+              controls
+              autoPlay
+              playsInline
+              className="w-full h-auto"
+            />
+          </div>
+        </div>
+      )}
     </section>
   );
 }
