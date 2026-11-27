@@ -148,7 +148,7 @@ export const projectsData = [
     client: "Career Tools",
     description: "Resume builder web app with a separate backend, a live preview and automated Playwright tests.",
     techStack: ["JavaScript", "Backend", "Playwright"],
-    image: null,
+    image: "/assets/projects/resume-builder.png",
     github: "https://github.com/Joshva2026/Ai_Resume_Builder",
     badge: "Web Application"
   },
@@ -187,7 +187,7 @@ export const projectsData = [
     client: "Retail Analytics",
     description: "Customer behaviour analysis with an R analytics engine and a web presentation layer for the results.",
     techStack: ["R", "Python", "Analytics"],
-    image: null,
+    image: "/assets/projects/ecommerce-analytics.png",
     github: "https://github.com/Joshva2026/E-Commerce-Big-Data-Analytics-Using-R",
     badge: "Data Analytics"
   },
@@ -239,7 +239,7 @@ export const projectsData = [
     client: "Travel Booking",
     description: "Travel website built with React, TypeScript and Vite.",
     techStack: ["React", "TypeScript", "Vite"],
-    image: null,
+    image: "/assets/projects/joshva-travels.png",
     github: "https://github.com/Joshva2026/Joshva_Travels",
     badge: "Web"
   },
@@ -252,7 +252,7 @@ export const projectsData = [
     client: "Resume Platform",
     description: "Python backend for the resume app, with tests and a Render deployment configuration.",
     techStack: ["Python", "REST API", "Render"],
-    image: null,
+    image: "/assets/projects/resume-app-backend.png",
     github: "https://github.com/Joshva2026/Resume-App-Backend",
     badge: "Backend"
   },
@@ -291,7 +291,7 @@ export const projectsData = [
     client: "Personal Project",
     description: "Cinematic single-page frontend experiment.",
     techStack: ["HTML", "CSS", "JavaScript"],
-    image: null,
+    image: "/assets/projects/orange-cinematic.png",
     github: "https://github.com/Joshva2026/orange-cinematic",
     badge: "Frontend"
   }
