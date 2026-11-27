@@ -7,7 +7,7 @@ export const personalInfo = {
   tagline: "B.Sc. IT Graduate | Web Development & AI/ML Enthusiast | Exploring UI/UX",
   bio: "I am a B.Sc. Information Technology graduate currently pursuing MCA. I build expressive interfaces and craft practical web & AI-driven experiences that feel as intuitive as they look.",
   email: "joshvamca2526@gmail.com",
-  github: "https://github.com/joshvapriyan",
+  github: "https://github.com/Joshva2026",
   linkedin: "https://linkedin.com/in/joshvapriyan",
   location: "India",
   status: "Available for entry-level roles & internships",
@@ -138,7 +138,7 @@ export const projectsData = [
     solution: "Trained a Deep Learning CNN model on plant leaf dataset images with an image processing interface for visual diagnostic feedback.",
     techStack: ["Python", "TensorFlow", "OpenCV", "CNN", "Machine Learning"],
     image: "/assets/projects/leaf-disease.jpg",
-    github: "https://github.com/joshvapriyan",
+    github: "https://github.com/Joshva2026/Ai-LeafDisease-Detection",
     liveDemo: null,
     badge: "Computer Vision"
   },
@@ -154,7 +154,7 @@ export const projectsData = [
     solution: "Created an interactive web tool allowing users to input details, customize layouts, and view/export formatted resumes with instant feedback.",
     techStack: ["React.js", "Node.js", "JavaScript", "Tailwind CSS", "REST API"],
     image: "/assets/projects/resume-builder.jpg",
-    github: "https://github.com/joshvapriyan",
+    github: "https://github.com/Joshva2026/Ai_Resume_Builder",
     liveDemo: null,
     badge: "Web Application"
   },
@@ -170,7 +170,7 @@ export const projectsData = [
     solution: "Implemented an ACID-compliant transactional backend with parameterized SQL procedures, sequence counters, and interactive AngularJS dashboards for administrative oversight.",
     techStack: ["AngularJS", "Node.js", "Express", "PostgreSQL", "Chart.js", "JWT"],
     image: "/assets/projects/hospital-management.png",
-    github: "https://github.com/joshvapriyan",
+    github: "https://github.com/Joshva2026/Hospital-Management-System",
     liveDemo: null,
     badge: "Full-Stack & Database"
   },
@@ -186,7 +186,7 @@ export const projectsData = [
     solution: "Engineered high-performance vectorized R scripts using data.table, forecast, and arules orchestrated with a native lightweight Python API and Chart.js dashboards.",
     techStack: ["R (v4.6.1)", "data.table", "auto.arima", "Apriori (arules)", "Python", "Chart.js"],
     image: "/assets/projects/ecommerce-analytics.png",
-    github: "https://github.com/joshvapriyan",
+    github: "https://github.com/Joshva2026/E-Commerce-Big-Data-Analytics-Using-R",
     liveDemo: null,
     badge: "Big Data Analytics"
   },
@@ -202,7 +202,7 @@ export const projectsData = [
     solution: "Architected a rapid-loading web application with Leaflet.js coordinate tracking, priority emergency hotlines, and instant vehicle dispatch capabilities.",
     techStack: ["JavaScript", "HTML5", "Leaflet.js", "Tailwind CSS", "Express"],
     image: "/assets/projects/iyarkai-service.png",
-    github: "https://github.com/joshvapriyan",
+    github: "https://github.com/Joshva2026/iyarkai-service-2",
     liveDemo: null,
     badge: "Emergency Logistics"
   },
@@ -218,7 +218,7 @@ export const projectsData = [
     solution: "Created an interactive responsive web interface featuring dynamic brick product specifications, masonry estimation calculators, and lead capture workflows.",
     techStack: ["React.js", "TypeScript", "Tailwind CSS", "Vite", "Responsive Design"],
     image: "/assets/projects/bricks-business.png",
-    github: "https://github.com/joshvapriyan",
+    github: "https://github.com/Joshva2026/Bricks-Website",
     liveDemo: null,
     badge: "Commercial Web"
   },
@@ -234,7 +234,7 @@ export const projectsData = [
     solution: "Built a 4WD vehicle chassis controlled by C++ motor logic that reads ultrasonic distance measurements and dynamically changes direction.",
     techStack: ["C++", "Arduino", "ESP32", "Ultrasonic Sensors", "L298N Motor Driver"],
     image: "/assets/projects/iot-car.jpg",
-    github: "https://github.com/joshvapriyan",
+    github: "https://github.com/Joshva2026",
     liveDemo: null,
     badge: "Embedded IoT"
   }
@@ -350,6 +350,6 @@ export const faqData = [
   },
   {
     question: "How can we get in touch or request code samples?",
-    answer: "You can reach me directly via email at joshvamca2526@gmail.com, explore my code repositories at github.com/joshvapriyan, or connect with me on LinkedIn at linkedin.com/in/joshvapriyan."
+    answer: "You can reach me directly via email at joshvamca2526@gmail.com, explore my code repositories at github.com/Joshva2026, or connect with me on LinkedIn at linkedin.com/in/joshvapriyan."
   }
 ];
