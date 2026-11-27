@@ -64,13 +64,20 @@ export default function Projects() {
               </div>
 
               {/* Large Image Frame */}
-              <div className="relative aspect-[16/9] w-full rounded-[20px] overflow-hidden bg-[#ECE7F4] mb-6 border border-[#1A1814]/5">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover object-center group-hover:scale-103 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
-                  loading="eager"
-                />
+              <div className="relative aspect-[16/9] w-full rounded-[20px] overflow-hidden bg-[#ECE7F4] mb-6 border border-[#1A1814]/5 flex items-center justify-center">
+                {project.image ? (
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-contain object-center group-hover:scale-[1.02] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div className="w-full h-full flex flex-col items-center justify-center gap-2 p-6 text-center bg-gradient-to-br from-[#ECE7F4] via-white to-[#E4DCF2]">
+                    <span className="font-serif italic text-3xl sm:text-4xl text-[#68529B]">{project.title}</span>
+                    <span className="font-sans text-xs text-[#8A847B] tracking-wide">Screenshot coming soon</span>
+                  </div>
+                )}
               </div>
 
               {/* Bottom Details & Tech Stack */}
