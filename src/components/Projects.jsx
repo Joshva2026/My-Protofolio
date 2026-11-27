@@ -51,16 +51,22 @@ export default function Projects() {
                   </div>
                 </div>
 
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#FAF9FC] border border-[#1A1814]/10 hover:bg-[#68529B] hover:text-white transition-all text-xs font-sans font-semibold text-[#1A1814] self-start sm:self-auto shrink-0 shadow-2xs"
-                >
-                  <Github className="w-3.5 h-3.5" />
-                  <span>View Code</span>
-                  <ArrowUpRight className="w-3.5 h-3.5" />
-                </a>
+                {project.github ? (
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#FAF9FC] border border-[#1A1814]/10 hover:bg-[#68529B] hover:text-white transition-all text-xs font-sans font-semibold text-[#1A1814] self-start sm:self-auto shrink-0 shadow-2xs"
+                  >
+                    <Github className="w-3.5 h-3.5" />
+                    <span>View Code</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </a>
+                ) : (
+                  <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#ECE7F4] text-[#68529B] text-xs font-sans font-semibold self-start sm:self-auto shrink-0">
+                    Private repository
+                  </span>
+                )}
               </div>
 
               {/* Large Image Frame */}
