@@ -11,11 +11,10 @@ import Reviews from './components/Reviews';
 import Faq from './components/Faq';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import IntroSplash from './components/IntroSplash';
+import IntroSection from './components/IntroSection';
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('hero');
-  const [introDone, setIntroDone] = useState(false);
 
   // Scrollspy via IntersectionObserver
   useEffect(() => {
@@ -71,9 +70,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#FAF9FC] text-[#1A1814] flex flex-col relative selection:bg-[#ECE7F4] selection:text-[#68529B]">
-
-      {/* Landing intro video: shown on load, then the portfolio is revealed */}
-      {!introDone && <IntroSplash onFinish={() => setIntroDone(true)} />}
       
       {/* Delicate Framer grid background overlay */}
       <div className="fixed inset-0 framer-grid-bg pointer-events-none z-0 opacity-80"></div>
@@ -83,6 +79,8 @@ export default function App() {
 
       {/* Main Content Sections */}
       <main className="flex-grow relative z-10">
+        <IntroSection />
+
         <Hero />
         
         <div className="reveal-on-scroll">
