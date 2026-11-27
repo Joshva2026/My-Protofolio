@@ -19,9 +19,9 @@ export const personalInfo = {
 
 export const numbersData = [
   {
-    value: "12",
-    suffix: "+",
-    label: "Projects on GitHub",
+    value: "13",
+    suffix: "",
+    label: "Projects Built",
     description: "Web, AI/ML, data analytics & UX case studies"
   },
   {
@@ -211,15 +211,28 @@ export const projectsData = [
     category: "Emergency Healthtech & Geolocation",
     year: "2026",
     client: "Emergency Healthcare Logistics",
-    description: "Emergency dispatch platform for ambulances, mobile ICU units and patient transfers, with Leaflet.js map tracking.",
-    techStack: ["JavaScript", "Leaflet.js", "Express"],
-    image: null,
+    description: "Emergency dispatch command platform for ambulances, mobile ICU units, towing and patient transfers, with Leaflet.js map tracking and a Next.js 16 app.",
+    techStack: ["Next.js", "React", "Leaflet.js"],
+    image: "/assets/projects/iyarkai.jpg",
     github: "https://github.com/Joshva2026/iyarkai-service-2",
     badge: "Emergency Logistics"
   },
   {
-    id: "joshva-travels",
+    id: "king-sweets",
     number: "08",
+    title: "King Sweets: Royal Sweets Website",
+    category: "Restaurant & Sweet Shop Website",
+    year: "2026",
+    client: "King Sweets Palace",
+    description: "Brand website for a traditional sweet shop with a product showcase, image uploads handled by an Express backend and QR code support.",
+    techStack: ["React", "Express", "TypeScript"],
+    image: "/assets/projects/king-sweets.jpg",
+    github: null,
+    badge: "Private Repository"
+  },
+  {
+    id: "joshva-travels",
+    number: "09",
     title: "Joshva Travels",
     category: "Travel Website",
     year: "2026",
@@ -232,7 +245,7 @@ export const projectsData = [
   },
   {
     id: "resume-app-backend",
-    number: "09",
+    number: "10",
     title: "Resume App Backend",
     category: "Backend API",
     year: "2026",
@@ -245,7 +258,7 @@ export const projectsData = [
   },
   {
     id: "quickbite-ui",
-    number: "10",
+    number: "11",
     title: "QuickBite: Food Ordering UI",
     category: "UI Design & Frontend (CodeAlpha)",
     year: "2026",
@@ -258,7 +271,7 @@ export const projectsData = [
   },
   {
     id: "zomato-ux-case-study",
-    number: "11",
+    number: "12",
     title: "Zomato UX Case Study",
     category: "UX Research & Design (CodeAlpha)",
     year: "2026",
@@ -271,7 +284,7 @@ export const projectsData = [
   },
   {
     id: "orange-cinematic",
-    number: "12",
+    number: "13",
     title: "Orange Cinematic",
     category: "Frontend Experiment",
     year: "2026",
