@@ -11,6 +11,8 @@ import Reviews from './components/Reviews';
 import Faq from './components/Faq';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import WhatIDo from './components/WhatIDo';
+import StatsBand from './components/StatsBand';
 import IntroSection from './components/IntroSection';
 
 export default function App() {
@@ -109,6 +111,14 @@ export default function App() {
         
         <div className="reveal-on-scroll">
           <Projects />
+        </div>
+
+        <div className="reveal-on-scroll">
+          <WhatIDo />
+        </div>
+
+        <div className="reveal-on-scroll">
+          <StatsBand />
         </div>
         
         <div className="reveal-on-scroll">
