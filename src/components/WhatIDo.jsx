@@ -1,5 +1,5 @@
 import React from 'react';
-import { skillCategories } from '../data/portfolioData';
+import { personalInfo, skillCategories } from '../data/portfolioData';
 import { Code2, Brain, PenTool, Terminal } from 'lucide-react';
 
 const icons = [Code2, Brain, PenTool, Terminal];
@@ -9,10 +9,16 @@ export default function WhatIDo() {
   return (
     <section id="services" className="py-24 md:py-32 bg-[#F4F2FD] relative overflow-hidden">
       <div className="max-w-[1320px] mx-auto px-6 sm:px-8 lg:px-12">
-        <h2 className="font-serif text-4xl sm:text-5xl text-[#141226] tracking-tight mb-14">
-          What I <em className="italic text-[#5B3FD0]">Do</em>
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-5 relative flex justify-center">
+            <div className="absolute inset-[8%] rounded-[46%_54%_40%_60%/50%_44%_56%_50%] bg-gradient-to-br from-[#D9CCF8] to-[#C9DDFF]" aria-hidden="true" />
+            <img src="/assets/profile/character-laptop.webp" alt={`Illustrated character of ${personalInfo.name} working on a laptop`} loading="lazy" className="relative z-10 w-full max-w-[420px] object-contain drop-shadow-[0_30px_40px_rgba(60,40,120,0.25)]" />
+          </div>
+          <div className="lg:col-span-7">
+            <h2 className="font-serif text-4xl sm:text-5xl text-[#141226] tracking-tight mb-12">
+              What I <em className="italic text-[#5B3FD0]">Do</em>
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {skillCategories.map((cat, i) => {
             const Icon = icons[i % icons.length];
             return (
@@ -30,6 +36,8 @@ export default function WhatIDo() {
               </div>
             );
           })}
+            </div>
+          </div>
         </div>
       </div>
     </section>

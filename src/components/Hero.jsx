@@ -52,7 +52,7 @@ export default function Hero() {
             <div className="absolute inset-[6%] rounded-[46%_54%_40%_60%/50%_44%_56%_50%] bg-gradient-to-br from-[#D9CCF8] to-[#C9DDFF]" aria-hidden="true" />
             {hasCharacter ? (
               <img
-                src="/assets/profile/character.png"
+                src="/assets/profile/character-suit.webp"
                 alt={`Illustrated character of ${personalInfo.name}`}
                 onError={() => setHasCharacter(false)}
                 className="relative z-10 w-full h-full object-contain drop-shadow-[0_30px_40px_rgba(60,40,120,0.25)]"
@@ -61,7 +61,7 @@ export default function Hero() {
               <div className="relative z-10 w-full h-full flex flex-col items-center justify-center text-center p-10 rounded-[32px] border-2 border-dashed border-[#7C5CD6]/40 bg-white/60">
                 <Sparkles className="w-10 h-10 text-[#7C5CD6]" />
                 <p className="mt-4 font-serif text-2xl text-[#141226]">Character illustration</p>
-                <p className="mt-2 text-sm text-[#4B4766]">Add /public/assets/profile/character.png</p>
+                <p className="mt-2 text-sm text-[#4B4766]">Add /public/assets/profile/character-suit.webp</p>
               </div>
             )}
 
