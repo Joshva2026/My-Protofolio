@@ -102,8 +102,8 @@ export default function Projects() {
     <section id="projects" className="py-24 md:py-32 bg-white relative overflow-hidden">
       <div className="max-w-[1320px] mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 mb-14">
-          <h2 className="font-serif text-4xl sm:text-5xl text-[#141226] tracking-tight flex items-center gap-3">
-            Selected Works <Sparkles className="w-6 h-6 text-[#7C5CD6]" aria-hidden="true" />
+          <h2 className="font-serif text-4xl sm:text-5xl text-[#141A3D] tracking-tight flex items-center gap-3">
+            Selected Works <Sparkles className="w-6 h-6 text-[#6C5CE7]" aria-hidden="true" />
           </h2>
           <div className="flex gap-2 overflow-x-auto pb-1 -mx-1 px-1" role="tablist" aria-label="Filter projects">
             {categories.map((c) => (
@@ -114,8 +114,8 @@ export default function Projects() {
                 onClick={() => setFilter(c)}
                 className={`shrink-0 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold border transition ${
                   filter === c
-                    ? 'bg-[#5B3FD0] border-[#5B3FD0] text-white'
-                    : 'bg-white border-[#7C5CD6]/25 text-[#5B3FD0] hover:border-[#7C5CD6]'
+                    ? 'bg-[#5B4BD9] border-[#5B4BD9] text-white'
+                    : 'bg-white border-[#6C5CE7]/25 text-[#5B4BD9] hover:border-[#6C5CE7]'
                 }`}
               >
                 {c === ALL ? 'All' : c}
@@ -131,21 +131,21 @@ export default function Projects() {
               type="button"
               onClick={() => openProject(project)}
               aria-label={`Open case details for ${project.title}`}
-              className="group text-left rounded-[24px] bg-white border border-[#141226]/8 shadow-[0_10px_30px_-18px_rgba(20,18,38,0.35)] overflow-hidden hover:-translate-y-1 hover:shadow-[0_24px_50px_-20px_rgba(91,63,208,0.35)] transition duration-500 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7C5CD6]"
+              className="group text-left rounded-[24px] bg-white border border-[#141A3D]/8 shadow-[0_10px_30px_-18px_rgba(20,18,38,0.35)] overflow-hidden hover:-translate-y-1 hover:shadow-[0_24px_50px_-20px_rgba(91,63,208,0.35)] transition duration-500 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#6C5CE7]"
             >
-              <div className="relative aspect-[16/11] bg-[#F4F2FD] overflow-hidden">
+              <div className="relative aspect-[16/11] bg-[#F4F6FE] overflow-hidden">
                 {project.image ? (
                   <img src={project.image} alt="" loading="lazy" className="w-full h-full object-cover object-top transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]" />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center p-6 font-serif italic text-2xl text-[#5B3FD0]">{project.title}</div>
+                  <div className="w-full h-full flex items-center justify-center p-6 font-serif italic text-2xl text-[#5B4BD9]">{project.title}</div>
                 )}
               </div>
               <div className="p-5 flex items-start justify-between gap-4">
                 <div className="min-w-0">
-                  <p className="font-sans text-xs font-semibold text-[#7C5CD6]">{project.category}</p>
-                  <h3 className="font-serif text-xl text-[#141226] mt-1 leading-snug">{project.title}</h3>
+                  <p className="font-sans text-xs font-semibold text-[#6C5CE7]">{project.category}</p>
+                  <h3 className="font-serif text-xl text-[#141A3D] mt-1 leading-snug">{project.title}</h3>
                 </div>
-                <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#F4F2FD] text-[#5B3FD0] group-hover:bg-[#5B3FD0] group-hover:text-white transition">
+                <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#F4F6FE] text-[#5B4BD9] group-hover:bg-[#5B4BD9] group-hover:text-white transition">
                   <ArrowUpRight className="w-4 h-4" />
                 </span>
               </div>
