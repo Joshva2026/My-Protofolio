@@ -68,9 +68,21 @@ export default function App() {
     };
   }, []);
 
+  useEffect(() => {
+    const bar = document.getElementById('scroll-progress');
+    const onScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      if (bar) bar.style.transform = `scaleX(${max > 0 ? window.scrollY / max : 0})`;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#FAF9FC] text-[#1A1814] flex flex-col relative selection:bg-[#ECE7F4] selection:text-[#68529B]">
       
+      <div id="scroll-progress" className="scroll-progress" aria-hidden="true"></div>
+
       {/* Delicate Framer grid background overlay */}
       <div className="fixed inset-0 framer-grid-bg pointer-events-none z-0 opacity-80"></div>
 
