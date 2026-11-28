@@ -1,14 +1,149 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { projectsData } from '../data/portfolioData';
 import { Github } from './Icons';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, X } from 'lucide-react';
+
+function ProjectDialog({ project, onClose, dialogRef }) {
+  return (
+    <dialog
+      ref={dialogRef}
+      onClose={onClose}
+      onClick={(e) => { if (e.target === e.currentTarget) e.currentTarget.close(); }}
+      className="project-dialog m-auto w-[min(92vw,760px)] max-h-[88vh] rounded-[24px] bg-white p-0 text-[#1A1814] shadow-2xl backdrop:bg-[#1A1814]/50 backdrop:backdrop-blur-sm"
+      aria-labelledby="project-dialog-title"
+    >
+      {project && (
+        <div className="relative">
+          <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#ECE7F4]">
+            <img src={project.image} alt="" className="w-full h-full object-cover object-top" />
+            <button
+              type="button"
+              onClick={() => dialogRef.current?.close()}
+              className="absolute top-4 right-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-[#1A1814] shadow-sm hover:bg-white"
+              aria-label="Close project details"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+
+          <div className="p-6 sm:p-10 space-y-6">
+            <div className="flex flex-wrap items-center gap-3 text-xs font-sans font-semibold uppercase tracking-[0.16em] text-[#68529B]">
+              <span>{project.number}</span>
+              <span className="w-6 h-px bg-[#68529B]/40" aria-hidden="true"></span>
+              <span>{project.year}</span>
+            </div>
+
+            <h3 id="project-dialog-title" className="font-serif text-3xl sm:text-4xl leading-tight">
+              {project.title}
+            </h3>
+
+            <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm font-sans">
+              <div>
+                <dt className="text-[#8A847B] text-xs uppercase tracking-wider mb-1">Category</dt>
+                <dd className="text-[#1A1814]">{project.category}</dd>
+              </div>
+              <div>
+                <dt className="text-[#8A847B] text-xs uppercase tracking-wider mb-1">Client / Context</dt>
+                <dd className="text-[#1A1814]">{project.client}</dd>
+              </div>
+            </dl>
+
+            <p className="font-sans text-base leading-relaxed text-[#4A4640]">{project.description}</p>
+
+            <div className="flex flex-wrap gap-2">
+              {project.techStack.map((tech) => (
+                <span key={tech} className="px-3 py-1 rounded-full bg-[#ECE7F4] text-[#68529B] text-xs font-semibold">
+                  {tech}
+                </span>
+              ))}
+            </div>
+
+            <div className="pt-2">
+              {project.github ? (
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#1A1814] text-white text-sm font-semibold hover:bg-[#68529B] transition-colors"
+                >
+                  <Github className="w-4 h-4" />
+                  View code on GitHub
+                  <ArrowUpRight className="w-4 h-4" />
+                </a>
+              ) : (
+                <span className="inline-flex items-center px-5 py-2.5 rounded-full bg-[#ECE7F4] text-[#68529B] text-sm font-semibold">
+                  Private repository
+                </span>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+    </dialog>
+  );
+}
+
+function ProjectRow({ project, index, onOpen }) {
+  const reversed = index % 2 === 1;
+  return (
+    <article className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center ${reversed ? 'lg:[&>*:first-child]:order-2' : ''}`}>
+      <button
+        type="button"
+        onClick={() => onOpen(project)}
+        className="group lg:col-span-7 relative block w-full text-left rounded-[22px] overflow-hidden bg-[#ECE7F4] border border-[#1A1814]/8 aspect-[16/10] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#68529B]"
+        aria-label={`Open case details for ${project.title}`}
+      >
+        {project.image ? (
+          <img
+            src={project.image}
+            alt=""
+            loading="lazy"
+            className="project-img w-full h-full object-cover object-top transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center p-6 bg-gradient-to-br from-[#ECE7F4] via-white to-[#E4DCF2]">
+            <span className="font-serif italic text-3xl text-[#68529B]">{project.title}</span>
+          </div>
+        )}
+        <span className="absolute bottom-4 left-4 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 text-xs font-semibold text-[#1A1814] opacity-0 translate-y-2 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0 group-focus-visible:opacity-100">
+          View case details <ArrowUpRight className="w-3.5 h-3.5" />
+        </span>
+      </button>
+
+      <div className="lg:col-span-5 space-y-5">
+        <div className="flex items-baseline gap-4">
+          <span className="font-serif italic text-3xl text-[#68529B]">{project.number}</span>
+          <span className="text-xs font-semibold uppercase tracking-[0.16em] text-[#8A847B]">{project.badge}</span>
+        </div>
+        <h3 className="font-serif text-3xl sm:text-4xl leading-[1.1] text-[#1A1814]">{project.title}</h3>
+        <p className="font-sans text-sm text-[#8A847B]">
+          {project.category} &bull; <span className="font-serif italic text-[#4A4640]">{project.client}</span>
+        </p>
+        <p className="font-sans text-base leading-relaxed text-[#4A4640]">{project.description}</p>
+        <div className="flex flex-wrap gap-2">
+          {project.techStack.map((tech) => (
+            <span key={tech} className="px-3 py-1 rounded-full bg-white border border-[#68529B]/15 text-[#68529B] text-[11px] font-semibold">
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+    </article>
+  );
+}
 
 export default function Projects() {
+  const dialogRef = useRef(null);
+  const [active, setActive] = useState(null);
+
+  const openProject = (project) => {
+    setActive(project);
+    requestAnimationFrame(() => dialogRef.current?.showModal());
+  };
+
   return (
     <section id="projects" className="py-24 md:py-32 bg-[#FAF9FC] border-t border-[#1A1814]/10 relative overflow-hidden">
       <div className="max-w-[1320px] mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
-        
-        {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 pb-8 border-b border-[#1A1814]/10">
           <div className="space-y-4 max-w-2xl">
             <div className="flex items-center gap-3">
@@ -17,101 +152,23 @@ export default function Projects() {
                 Projects &amp; Systems
               </span>
             </div>
-
             <h2 className="font-serif text-4xl sm:text-5xl lg:text-[56px] text-[#1A1814] leading-[1.05] tracking-tight">
-              Selected work, end-to-end from concept to <em className="italic text-[#4A4640] font-normal">ship.</em>
+              Selected work, from concept to <em className="italic text-[#4A4640] font-normal">ship.</em>
             </h2>
           </div>
-
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#1A1814]/10 text-xs font-sans font-semibold text-[#68529B] shadow-2xs">
-            <span>{projectsData.length} Featured Works</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#1A1814]/10 text-xs font-sans font-semibold text-[#68529B] shadow-2xs self-start md:self-auto">
+            <span>{projectsData.length} projects</span>
           </div>
         </div>
 
-        {/* Project Cards Grid */}
-        <div className="space-y-12">
-          {projectsData.map((project) => (
-            <div
-              key={project.id}
-              className="p-6 sm:p-10 rounded-[24px] bg-white border border-[#1A1814]/10 hover:border-[#68529B]/30 hover:shadow-xl transition-all duration-500 group"
-            >
-              {/* Card Top Row: Number, Title, Category */}
-              <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 mb-6">
-                <div className="flex items-baseline gap-4">
-                  <span className="font-serif italic text-2xl sm:text-3xl text-[#68529B]">
-                    {project.number}
-                  </span>
-                  <div>
-                    <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-[#1A1814] group-hover:text-[#68529B] transition-colors leading-tight">
-                      {project.title}
-                    </h3>
-                    <p className="font-sans text-xs sm:text-sm text-[#8A847B] font-medium mt-1">
-                      {project.category} &bull; <span className="font-serif italic text-[#4A4640]">{project.client}</span>
-                    </p>
-                  </div>
-                </div>
-
-                {project.github ? (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#FAF9FC] border border-[#1A1814]/10 hover:bg-[#68529B] hover:text-white transition-all text-xs font-sans font-semibold text-[#1A1814] self-start sm:self-auto shrink-0 shadow-2xs"
-                  >
-                    <Github className="w-3.5 h-3.5" />
-                    <span>View Code</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </a>
-                ) : (
-                  <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#ECE7F4] text-[#68529B] text-xs font-sans font-semibold self-start sm:self-auto shrink-0">
-                    Private repository
-                  </span>
-                )}
-              </div>
-
-              {/* Large Image Frame */}
-              <div className="relative aspect-[16/9] w-full rounded-[20px] overflow-hidden bg-[#ECE7F4] mb-6 border border-[#1A1814]/5 flex items-center justify-center">
-                {project.image ? (
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-contain object-center group-hover:scale-[1.02] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
-                    loading="lazy"
-                  />
-                ) : (
-                  <div className="w-full h-full flex flex-col items-center justify-center gap-2 p-6 text-center bg-gradient-to-br from-[#ECE7F4] via-white to-[#E4DCF2]">
-                    <span className="font-serif italic text-3xl sm:text-4xl text-[#68529B]">{project.title}</span>
-                    <span className="font-sans text-xs text-[#8A847B] tracking-wide">Screenshot coming soon</span>
-                  </div>
-                )}
-              </div>
-
-              {/* Bottom Details & Tech Stack */}
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pt-2">
-                <p className="font-sans text-sm sm:text-base text-[#4A4640] leading-relaxed max-w-3xl">
-                  {project.description}
-                </p>
-
-                <div className="flex flex-wrap gap-2 shrink-0">
-                  <span className="px-3 py-1 rounded-full bg-[#1A1814] text-white text-[11px] font-mono font-medium">
-                    {project.year}
-                  </span>
-                  {project.techStack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 rounded-full bg-[#ECE7F4] text-[#68529B] text-[11px] font-sans font-semibold border border-[#68529B]/15"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-            </div>
+        <div className="space-y-20 md:space-y-28">
+          {projectsData.map((project, index) => (
+            <ProjectRow key={project.id} project={project} index={index} onOpen={openProject} />
           ))}
         </div>
-
       </div>
+
+      <ProjectDialog project={active} dialogRef={dialogRef} onClose={() => setActive(null)} />
     </section>
   );
 }

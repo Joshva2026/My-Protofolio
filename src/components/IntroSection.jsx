@@ -38,6 +38,9 @@ export default function IntroSection() {
         <div className="absolute -bottom-40 -right-20 w-[40vw] h-[40vw] max-w-[500px] max-h-[500px] rounded-full bg-[#B9A6E6]/10 blur-[100px]" />
       </div>
 
+      {/* Soft hand-off into the light page below */}
+      <div className="pointer-events-none absolute bottom-0 inset-x-0 h-40 bg-gradient-to-b from-transparent to-[#FAF9FC]" aria-hidden="true" />
+
       {/* Top bar */}
       <header className="relative z-10 flex items-center justify-end px-5 sm:px-10 pt-28 sm:pt-32">
         <button

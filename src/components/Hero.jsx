@@ -1,147 +1,95 @@
 import React from 'react';
-import { personalInfo } from '../data/portfolioData';
+import { personalInfo, skillCategories } from '../data/portfolioData';
 import { Github, Linkedin } from './Icons';
-import { Mail, FileText } from 'lucide-react';
+import { Mail, FileText, ArrowDownRight } from 'lucide-react';
+
+// Every technology name shown here comes from the skills data, not a separate list.
+const marquee = skillCategories.flatMap((c) => c.skills.map((s) => s.name));
 
 export default function Hero() {
   return (
-    <section id="hero" className="relative pt-36 pb-20 md:pt-48 md:pb-28 overflow-hidden min-h-[92vh] flex items-center bg-[#FAF9FC]">
-      {/* Background delicate radial orb */}
-      <div className="glow-orb-lavender w-[550px] h-[550px] -top-24 right-[10%] opacity-40"></div>
-      <div className="glow-orb-lavender w-[400px] h-[400px] bottom-10 left-[5%] opacity-25"></div>
+    <section id="hero" className="relative min-h-[100svh] pt-32 pb-16 md:pt-40 overflow-hidden bg-[#FAF9FC] flex flex-col">
+      <div className="glow-orb-lavender w-[600px] h-[600px] -top-40 right-[-5%] opacity-50" aria-hidden="true"></div>
+      <div className="glow-orb-lavender w-[420px] h-[420px] bottom-0 left-[-5%] opacity-30" aria-hidden="true"></div>
 
-      <div className="max-w-[1320px] mx-auto px-6 sm:px-8 lg:px-12 relative z-10 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          
-          {/* Left Column: Typography, Eyebrow, Name, Role & Socials */}
-          <div className="lg:col-span-7 space-y-7">
-            
-            {/* Eyebrow Tag */}
-            <div className="flex items-center gap-3 hero-reveal-1">
-              <span className="w-6 h-0.5 bg-[#68529B] rounded-full"></span>
-              <span className="font-sans text-xs sm:text-sm font-semibold tracking-[0.2em] text-[#68529B] uppercase">
-                Portfolio &amp; R&eacute;sum&eacute;
+      <div className="max-w-[1320px] mx-auto px-6 sm:px-8 lg:px-12 relative z-10 w-full flex-1 flex flex-col">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-end flex-1">
+          <div className="lg:col-span-8 space-y-8">
+            <div className="hero-reveal-1 inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white border border-[#1A1814]/10 shadow-2xs">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#33D770] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#33D770]"></span>
               </span>
+              <span className="font-sans text-xs sm:text-[13px] font-semibold text-[#1A1814]">{personalInfo.availabilityTag}</span>
             </div>
 
-            {/* Massive Name Headline in Instrument Serif */}
-            <h1 className="font-serif text-[64px] sm:text-[88px] lg:text-[112px] leading-[0.93] tracking-[-2px] text-[#1A1814] select-none hero-reveal-2">
-              <span>{personalInfo.firstName || 'Joshva'}</span>
-              <br />
-              <em className="italic text-[#4A4640] font-normal">
-                {personalInfo.lastName || 'Priyan'}
-              </em>
+            <h1 className="hero-reveal-2 font-serif text-[64px] sm:text-[96px] lg:text-[128px] leading-[0.9] tracking-[-0.03em] text-[#1A1814]">
+              <span className="block">{personalInfo.firstName}</span>
+              <em className="block italic text-[#68529B] font-normal">{personalInfo.lastName}.</em>
             </h1>
 
-            {/* Role Capsule Badge */}
-            <div className="inline-flex items-center gap-3 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-[#68529B] text-white shadow-sm flex-wrap hero-reveal-3">
-              <div className="w-2.5 h-2.5 rounded-full bg-white relative shrink-0">
-                <span className="animate-ping absolute inset-0 inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-              </div>
-              <span className="font-sans text-xs sm:text-sm font-semibold tracking-tight">
-                {personalInfo.role}
-              </span>
-              <span className="w-px h-3.5 bg-white/30 hidden sm:inline-block"></span>
-              <span className="font-serif italic text-white/90 text-sm hidden sm:inline-block">
-                {personalInfo.roleItalic}
-              </span>
+            <div className="hero-reveal-3 space-y-5 max-w-2xl">
+              <p className="font-sans text-lg sm:text-xl font-semibold text-[#1A1814]">{personalInfo.role}</p>
+              <p className="font-sans text-base sm:text-lg text-[#4A4640] leading-[1.65]">{personalInfo.bio}</p>
             </div>
 
-            {/* Bio Narrative */}
-            <p className="text-base sm:text-lg text-[#4A4640] font-sans font-normal leading-[1.6] max-w-xl hero-reveal-3">
-              {personalInfo.bio}
-            </p>
-
-            {/* Social Pill Buttons */}
-            <div className="flex flex-wrap items-center gap-2.5 pt-2 hero-reveal-4">
-              <a
-                href={personalInfo.github}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#68529B] text-white text-xs sm:text-[13px] font-sans font-medium hover:bg-[#584485] transition-all shadow-xs hover:shadow-sm active:scale-98"
-              >
-                <Github className="w-3.5 h-3.5" />
-                <span>GitHub</span>
-              </a>
-
-              <a
-                href={personalInfo.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#68529B] text-white text-xs sm:text-[13px] font-sans font-medium hover:bg-[#584485] transition-all shadow-xs hover:shadow-sm active:scale-98"
-              >
-                <Linkedin className="w-3.5 h-3.5" />
-                <span>LinkedIn</span>
-              </a>
-
+            <div className="hero-reveal-4 flex flex-wrap items-center gap-3 pt-2">
               <a
                 href={`mailto:${personalInfo.email}`}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-[#1A1814]/15 text-[#1A1814] text-xs sm:text-[13px] font-sans font-medium hover:bg-[#FAF9FC] transition-all shadow-2xs hover:shadow-xs active:scale-98"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#1A1814] text-white text-sm font-semibold hover:bg-[#68529B] transition-colors"
               >
-                <Mail className="w-3.5 h-3.5 text-[#68529B]" />
-                <span>Email</span>
+                <Mail className="w-4 h-4" />
+                Start a conversation
               </a>
-
               <a
                 href="/resume.pdf"
                 download="Joshva_Priyan_Resume.pdf"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-[#1A1814]/15 text-[#1A1814] text-xs sm:text-[13px] font-sans font-medium hover:bg-[#FAF9FC] transition-all shadow-2xs hover:shadow-xs active:scale-98"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white border border-[#1A1814]/15 text-[#1A1814] text-sm font-semibold hover:border-[#68529B]/40 transition-colors"
               >
-                <FileText className="w-3.5 h-3.5 text-[#68529B]" />
-                <span>R&eacute;sum&eacute;</span>
+                <FileText className="w-4 h-4 text-[#68529B]" />
+                Download résumé
+              </a>
+              <a href={personalInfo.github} target="_blank" rel="noreferrer" aria-label="GitHub profile" className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white border border-[#1A1814]/15 hover:border-[#68529B]/40 transition-colors">
+                <Github className="w-4 h-4" />
+              </a>
+              <a href={personalInfo.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn profile" className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white border border-[#1A1814]/15 hover:border-[#68529B]/40 transition-colors">
+                <Linkedin className="w-4 h-4" />
               </a>
             </div>
-
           </div>
 
-          {/* Right Column: Framer Portrait Card Presentation */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-end relative hero-reveal-card">
-            
-            {/* Decorative pattern behind card */}
-            <div className="absolute -top-8 -right-8 w-72 h-72 rounded-full border border-[#68529B]/10 pointer-events-none -z-0"></div>
-            <div className="absolute -bottom-6 -left-6 w-56 h-56 rounded-full border border-[#68529B]/10 pointer-events-none -z-0"></div>
-
-            {/* Framer Portrait Card Container */}
-            <div className="w-full max-w-[360px] h-[450px] sm:h-[480px] framer-lavender-card p-2 relative overflow-hidden group z-10 border border-white/70">
-              
-              {/* Photo */}
-              <div className="w-full h-full rounded-[20px] overflow-hidden bg-[#ECE7F4] relative">
+          <div className="hero-reveal-card lg:col-span-4 relative">
+            <div className="framer-lavender-card p-2 max-w-[380px] mx-auto lg:ml-auto">
+              <div className="relative aspect-[4/5] rounded-[20px] overflow-hidden bg-[#ECE7F4]">
                 <img
-                  src={personalInfo.profileImage || "/assets/profile/avatar.jpg"}
+                  src={personalInfo.profileImage}
                   alt={personalInfo.name}
-                  className="w-full h-full object-cover object-center group-hover:scale-104 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                  className="w-full h-full object-cover object-center"
                   loading="eager"
                 />
-
-                {/* Subtle vignette gradient at bottom */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60"></div>
-
-                {/* Bottom Card Identity Info */}
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white text-xs font-sans font-medium">
-                  <span className="tracking-wide drop-shadow-sm">{personalInfo.location}</span>
-                  <span className="font-serif italic text-sm text-white/90 drop-shadow-sm">
-                    {personalInfo.name}
-                  </span>
+                <div className="absolute inset-x-0 bottom-0 p-5 bg-gradient-to-t from-black/70 to-transparent text-white">
+                  <p className="font-serif italic text-2xl">{personalInfo.name}</p>
+                  <p className="text-xs tracking-wide text-white/80 mt-1">{personalInfo.location} · {personalInfo.responseTime}</p>
                 </div>
               </div>
-
-              {/* Floating Frosted Glass Availability Badge */}
-              <div className="absolute top-5 left-5 right-5 sm:right-auto z-20">
-                <div className="framer-glass-badge rounded-full px-4 py-2 flex items-center gap-2.5">
-                  <span className="relative flex h-2.5 w-2.5 shrink-0">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#33D770] opacity-80"></span>
-                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#33D770]"></span>
-                  </span>
-                  <span className="text-xs font-sans font-semibold text-[#1A1814] tracking-tight">
-                    {personalInfo.status}
-                  </span>
-                </div>
-              </div>
-
             </div>
-
           </div>
+        </div>
 
+        <div className="hero-reveal-4 mt-16 border-t border-[#1A1814]/10 pt-6 flex items-center justify-between gap-6">
+          <div className="marquee-track overflow-hidden flex-1 [mask-image:linear-gradient(90deg,transparent,#000_10%,#000_90%,transparent)]">
+            <div className="marquee-inner flex w-max gap-10 whitespace-nowrap font-serif italic text-xl sm:text-2xl text-[#4A4640]">
+              {[...marquee, ...marquee].map((t, i) => (
+                <span key={i} className="flex items-center gap-10">
+                  {t}
+                  <span className="text-[#68529B]" aria-hidden="true">✦</span>
+                </span>
+              ))}
+            </div>
+          </div>
+          <a href="#about" className="hidden md:inline-flex shrink-0 items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#68529B]">
+            Scroll <ArrowDownRight className="w-4 h-4" />
+          </a>
         </div>
       </div>
     </section>
