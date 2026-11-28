@@ -29,7 +29,7 @@ export default function Contact() {
     'w-full bg-transparent border-b border-white/20 focus:border-[#B9A6E6] outline-none py-3 text-white placeholder:text-white/35 font-sans text-base transition-colors';
 
   return (
-    <section id="contact" className="relative overflow-hidden bg-[#0E0B14] text-white py-24 md:py-36">
+    <section id="contact" className="relative overflow-hidden bg-[#141A3D] text-white py-24 md:py-36">
       <div className="pointer-events-none absolute -top-32 left-1/2 -translate-x-1/2 w-[80vw] max-w-[1000px] h-[500px] rounded-full bg-[#68529B]/30 blur-[140px]" aria-hidden="true" />
 
       <div className="max-w-[1320px] mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
@@ -95,7 +95,7 @@ export default function Contact() {
             </label>
             <div className="sm:col-span-2 flex flex-wrap items-center justify-between gap-4 pt-2">
               <p className="text-xs text-white/45 max-w-sm">Opens your mail app with the message ready to send.</p>
-              <button type="submit" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#B9A6E6] text-[#0E0B14] text-sm font-semibold hover:bg-white transition-colors">
+              <button type="submit" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#B9A6E6] text-[#141A3D] text-sm font-semibold hover:bg-white transition-colors">
                 Send message <ArrowUpRight className="w-4 h-4" />
               </button>
             </div>
