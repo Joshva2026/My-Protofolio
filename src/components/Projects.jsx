@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { projectsData } from '../data/portfolioData';
 import { Github } from './Icons';
-import { ArrowUpRight, X } from 'lucide-react';
+import { ArrowUpRight, Sparkles, X } from 'lucide-react';
 
 function ProjectDialog({ project, onClose, dialogRef }) {
   return (
@@ -83,58 +83,15 @@ function ProjectDialog({ project, onClose, dialogRef }) {
   );
 }
 
-function ProjectRow({ project, index, onOpen }) {
-  const reversed = index % 2 === 1;
-  return (
-    <article className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center ${reversed ? 'lg:[&>*:first-child]:order-2' : ''}`}>
-      <button
-        type="button"
-        onClick={() => onOpen(project)}
-        className="group lg:col-span-7 relative block w-full text-left rounded-[22px] overflow-hidden bg-[#ECE7F4] border border-[#1A1814]/8 aspect-[16/10] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#68529B]"
-        aria-label={`Open case details for ${project.title}`}
-      >
-        {project.image ? (
-          <img
-            src={project.image}
-            alt=""
-            loading="lazy"
-            className="project-img w-full h-full object-cover object-top transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center p-6 bg-gradient-to-br from-[#ECE7F4] via-white to-[#E4DCF2]">
-            <span className="font-serif italic text-3xl text-[#68529B]">{project.title}</span>
-          </div>
-        )}
-        <span className="absolute bottom-4 left-4 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 text-xs font-semibold text-[#1A1814] opacity-0 translate-y-2 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0 group-focus-visible:opacity-100">
-          View case details <ArrowUpRight className="w-3.5 h-3.5" />
-        </span>
-      </button>
-
-      <div className="lg:col-span-5 space-y-5">
-        <div className="flex items-baseline gap-4">
-          <span className="font-serif italic text-3xl text-[#68529B]">{project.number}</span>
-          <span className="text-xs font-semibold uppercase tracking-[0.16em] text-[#8A847B]">{project.badge}</span>
-        </div>
-        <h3 className="font-serif text-3xl sm:text-4xl leading-[1.1] text-[#1A1814]">{project.title}</h3>
-        <p className="font-sans text-sm text-[#8A847B]">
-          {project.category} &bull; <span className="font-serif italic text-[#4A4640]">{project.client}</span>
-        </p>
-        <p className="font-sans text-base leading-relaxed text-[#4A4640]">{project.description}</p>
-        <div className="flex flex-wrap gap-2">
-          {project.techStack.map((tech) => (
-            <span key={tech} className="px-3 py-1 rounded-full bg-white border border-[#68529B]/15 text-[#68529B] text-[11px] font-semibold">
-              {tech}
-            </span>
-          ))}
-        </div>
-      </div>
-    </article>
-  );
-}
+const ALL = 'All';
 
 export default function Projects() {
   const dialogRef = useRef(null);
   const [active, setActive] = useState(null);
+  const [filter, setFilter] = useState(ALL);
+
+  const categories = [ALL, ...new Set(projectsData.map((p) => p.category))];
+  const visible = filter === ALL ? projectsData : projectsData.filter((p) => p.category === filter);
 
   const openProject = (project) => {
     setActive(project);
@@ -142,28 +99,57 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" className="py-24 md:py-32 bg-[#FAF9FC] border-t border-[#1A1814]/10 relative overflow-hidden">
+    <section id="projects" className="py-24 md:py-32 bg-white relative overflow-hidden">
       <div className="max-w-[1320px] mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 pb-8 border-b border-[#1A1814]/10">
-          <div className="space-y-4 max-w-2xl">
-            <div className="flex items-center gap-3">
-              <span className="w-6 h-0.5 bg-[#68529B] rounded-full"></span>
-              <span className="font-sans text-xs sm:text-sm font-semibold tracking-[0.2em] text-[#68529B] uppercase">
-                Projects &amp; Systems
-              </span>
-            </div>
-            <h2 className="font-serif text-4xl sm:text-5xl lg:text-[56px] text-[#1A1814] leading-[1.05] tracking-tight">
-              Selected work, from concept to <em className="italic text-[#4A4640] font-normal">ship.</em>
-            </h2>
-          </div>
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#1A1814]/10 text-xs font-sans font-semibold text-[#68529B] shadow-2xs self-start md:self-auto">
-            <span>{projectsData.length} projects</span>
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 mb-14">
+          <h2 className="font-serif text-4xl sm:text-5xl text-[#141226] tracking-tight flex items-center gap-3">
+            Selected Works <Sparkles className="w-6 h-6 text-[#7C5CD6]" aria-hidden="true" />
+          </h2>
+          <div className="flex gap-2 overflow-x-auto pb-1 -mx-1 px-1" role="tablist" aria-label="Filter projects">
+            {categories.map((c) => (
+              <button
+                key={c}
+                role="tab"
+                aria-selected={filter === c}
+                onClick={() => setFilter(c)}
+                className={`shrink-0 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold border transition ${
+                  filter === c
+                    ? 'bg-[#5B3FD0] border-[#5B3FD0] text-white'
+                    : 'bg-white border-[#7C5CD6]/25 text-[#5B3FD0] hover:border-[#7C5CD6]'
+                }`}
+              >
+                {c === ALL ? 'All' : c}
+              </button>
+            ))}
           </div>
         </div>
 
-        <div className="space-y-20 md:space-y-28">
-          {projectsData.map((project, index) => (
-            <ProjectRow key={project.id} project={project} index={index} onOpen={openProject} />
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+          {visible.map((project) => (
+            <button
+              key={project.id}
+              type="button"
+              onClick={() => openProject(project)}
+              aria-label={`Open case details for ${project.title}`}
+              className="group text-left rounded-[24px] bg-white border border-[#141226]/8 shadow-[0_10px_30px_-18px_rgba(20,18,38,0.35)] overflow-hidden hover:-translate-y-1 hover:shadow-[0_24px_50px_-20px_rgba(91,63,208,0.35)] transition duration-500 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7C5CD6]"
+            >
+              <div className="relative aspect-[16/11] bg-[#F4F2FD] overflow-hidden">
+                {project.image ? (
+                  <img src={project.image} alt="" loading="lazy" className="w-full h-full object-cover object-top transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]" />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center p-6 font-serif italic text-2xl text-[#5B3FD0]">{project.title}</div>
+                )}
+              </div>
+              <div className="p-5 flex items-start justify-between gap-4">
+                <div className="min-w-0">
+                  <p className="font-sans text-xs font-semibold text-[#7C5CD6]">{project.category}</p>
+                  <h3 className="font-serif text-xl text-[#141226] mt-1 leading-snug">{project.title}</h3>
+                </div>
+                <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#F4F2FD] text-[#5B3FD0] group-hover:bg-[#5B3FD0] group-hover:text-white transition">
+                  <ArrowUpRight className="w-4 h-4" />
+                </span>
+              </div>
+            </button>
           ))}
         </div>
       </div>

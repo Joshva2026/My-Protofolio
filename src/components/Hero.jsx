@@ -1,98 +1,77 @@
-import React, { useRef } from 'react';
-import { personalInfo, skillCategories } from '../data/portfolioData';
+import React, { useState } from 'react';
+import { personalInfo } from '../data/portfolioData';
 import { Github, Linkedin } from './Icons';
-import { Mail, FileText, ArrowDownRight } from 'lucide-react';
+import { ArrowUpRight, Mail, Sparkles } from 'lucide-react';
 
-// Every technology name shown here comes from the skills data, not a separate list.
-const marquee = skillCategories.flatMap((c) => c.skills.map((s) => s.name));
-
+// Light mockup-style hero. The cartoon character is loaded from
+// /assets/profile/character.png when that file is added; until then a
+// styled placeholder shows. The real photo is used only in the About profile card.
 export default function Hero() {
-  const ref = useRef(null);
-
-  // Mouse parallax: moves the photo a few pixels against the pointer. Disabled by CSS under reduced motion.
-  const onMove = (e) => {
-    const el = ref.current;
-    if (!el) return;
-    const x = e.clientX / window.innerWidth - 0.5;
-    const y = e.clientY / window.innerHeight - 0.5;
-    el.style.setProperty('--px', `${x * -24}px`);
-    el.style.setProperty('--py', `${y * -16}px`);
-  };
+  const [hasCharacter, setHasCharacter] = useState(true);
 
   return (
-    <section
-      id="hero"
-      ref={ref}
-      onMouseMove={onMove}
-      className="cinematic-hero relative min-h-[100svh] overflow-hidden bg-[#0E0B14] text-white flex flex-col"
-    >
-      {/* Full-bleed portrait as the cinematic backdrop */}
-      <div className="cinematic-photo absolute inset-0" aria-hidden="true">
-        <img
-          src={personalInfo.profileImage}
-          alt=""
-          className="h-full w-full object-cover object-[70%_18%] sm:object-[62%_12%]"
-          loading="eager"
-        />
-      </div>
-      {/* Readability and mood: left-side ink fade, bottom vignette, violet tint */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#0E0B14] via-[#0E0B14]/85 via-55% to-[#0E0B14]/40" aria-hidden="true" />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0E0B14] via-transparent to-[#0E0B14]/60" aria-hidden="true" />
-      <div className="absolute inset-0 mix-blend-multiply bg-[#2A1F45]/35" aria-hidden="true" />
-      <div className="glow-orb-lavender w-[560px] h-[560px] -top-40 -right-20 opacity-40" aria-hidden="true" />
+    <section id="hero" className="relative overflow-hidden bg-[#F4F2FD] pt-32 pb-20 md:pt-40 md:pb-28">
+      <div className="absolute -top-24 -left-24 w-[420px] h-[420px] rounded-full bg-[#E4DCF7] blur-3xl opacity-70" aria-hidden="true" />
+      <div className="absolute top-40 right-[-80px] w-[380px] h-[380px] rounded-full bg-[#DCE8FF] blur-3xl opacity-70" aria-hidden="true" />
 
-      <div className="relative z-10 flex flex-1 flex-col max-w-[1320px] w-full mx-auto px-6 sm:px-8 lg:px-12 pt-36 md:pt-44 pb-12">
-        <div className="max-w-3xl space-y-8">
-          <div className="hero-reveal-1 inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/15">
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#33D770] opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#33D770]"></span>
+      <div className="relative z-10 max-w-[1320px] mx-auto px-6 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="lg:col-span-6 space-y-7">
+          <p className="hero-reveal-1 font-serif text-3xl sm:text-4xl text-[#7C5CD6]">Hello, I’m</p>
+
+          <h1 className="hero-reveal-2 font-serif text-[56px] sm:text-[84px] lg:text-[96px] leading-[0.95] tracking-[-0.02em] text-[#141226]">
+            {personalInfo.firstName}{' '}
+            <span className="bg-gradient-to-r from-[#7C5CD6] via-[#8E6BEA] to-[#3C8CFF] bg-clip-text text-transparent">
+              {personalInfo.lastName}
             </span>
-            <span className="font-sans text-xs sm:text-[13px] font-semibold">{personalInfo.availabilityTag}</span>
-          </div>
-
-          <h1 className="hero-reveal-2 font-serif text-white text-[64px] sm:text-[104px] lg:text-[136px] leading-[0.88] tracking-[-0.03em]">
-            <span className="block text-white">{personalInfo.firstName}</span>
-            <em className="block italic text-[#B9A6E6] font-normal">{personalInfo.lastName}.</em>
           </h1>
 
-          <div className="hero-reveal-3 space-y-5 max-w-xl">
-            <p className="font-sans text-lg sm:text-xl font-semibold">{personalInfo.role}</p>
-            <p className="font-sans text-base sm:text-lg text-white/75 leading-[1.7]">{personalInfo.bio}</p>
+          <div className="hero-reveal-3 space-y-4">
+            <p className="font-sans text-lg sm:text-xl font-semibold text-[#141226]">{personalInfo.role}</p>
+            <span className="block w-16 h-1 rounded-full bg-[#7C5CD6]" aria-hidden="true" />
+            <p className="font-sans text-base sm:text-lg text-[#4B4766] leading-[1.7] max-w-xl">{personalInfo.bio}</p>
           </div>
 
-          <div className="hero-reveal-4 flex flex-wrap items-center gap-3 pt-2">
-            <a href={`mailto:${personalInfo.email}`} className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-[#0E0B14] text-sm font-semibold hover:bg-[#B9A6E6] transition-colors">
-              <Mail className="w-4 h-4" />
-              Start a conversation
+          <div className="hero-reveal-4 flex flex-wrap items-center gap-4 pt-2">
+            <a href="#projects" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-gradient-to-r from-[#5B3FD0] to-[#7C5CD6] text-white text-sm font-semibold shadow-[0_12px_30px_-10px_rgba(91,63,208,0.6)] hover:brightness-110 transition">
+              View My Work <ArrowUpRight className="w-4 h-4" />
             </a>
-            <a href="/resume.pdf" download="Joshva_Priyan_Resume.pdf" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm font-semibold hover:bg-white/20 transition-colors">
-              <FileText className="w-4 h-4" />
-              Download résumé
+            <a href="#about" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-[#7C5CD6]/40 bg-white text-[#5B3FD0] text-sm font-semibold hover:border-[#7C5CD6] transition">
+              About Me <ArrowUpRight className="w-4 h-4" />
             </a>
-            <a href={personalInfo.github} target="_blank" rel="noreferrer" aria-label="GitHub profile" className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/10 border border-white/20 hover:bg-white/20 transition-colors">
-              <Github className="w-4 h-4" />
-            </a>
-            <a href={personalInfo.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn profile" className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/10 border border-white/20 hover:bg-white/20 transition-colors">
-              <Linkedin className="w-4 h-4" />
-            </a>
+          </div>
+
+          <div className="hero-reveal-4 flex items-center gap-3 pt-2">
+            <a href={personalInfo.github} target="_blank" rel="noreferrer" aria-label="GitHub" className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#7C5CD6]/25 bg-white text-[#5B3FD0] hover:bg-[#7C5CD6] hover:text-white transition"><Github className="w-4 h-4" /></a>
+            <a href={personalInfo.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#7C5CD6]/25 bg-white text-[#5B3FD0] hover:bg-[#7C5CD6] hover:text-white transition"><Linkedin className="w-4 h-4" /></a>
+            <a href={`mailto:${personalInfo.email}`} aria-label="Email" className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#7C5CD6]/25 bg-white text-[#5B3FD0] hover:bg-[#7C5CD6] hover:text-white transition"><Mail className="w-4 h-4" /></a>
           </div>
         </div>
 
-        <div className="mt-auto pt-16 border-t border-white/15 flex items-center justify-between gap-6">
-          <div className="marquee-track overflow-hidden flex-1 [mask-image:linear-gradient(90deg,transparent,#000_10%,#000_90%,transparent)]">
-            <div className="marquee-inner flex w-max gap-10 whitespace-nowrap font-serif italic text-xl sm:text-2xl text-white/70">
-              {[...marquee, ...marquee].map((t, i) => (
-                <span key={i} className="flex items-center gap-10">
-                  {t}
-                  <span className="text-[#B9A6E6]" aria-hidden="true">✦</span>
-                </span>
-              ))}
+        <div className="lg:col-span-6 relative flex justify-center">
+          <div className="relative w-full max-w-[520px] aspect-[4/5]">
+            <div className="absolute inset-[6%] rounded-[46%_54%_40%_60%/50%_44%_56%_50%] bg-gradient-to-br from-[#D9CCF8] to-[#C9DDFF]" aria-hidden="true" />
+            {hasCharacter ? (
+              <img
+                src="/assets/profile/character-suit.webp"
+                alt={`Illustrated character of ${personalInfo.name}`}
+                onError={() => setHasCharacter(false)}
+                className="relative z-10 w-full h-full object-contain drop-shadow-[0_30px_40px_rgba(60,40,120,0.25)]"
+              />
+            ) : (
+              <div className="relative z-10 w-full h-full flex flex-col items-center justify-center text-center p-10 rounded-[32px] border-2 border-dashed border-[#7C5CD6]/40 bg-white/60">
+                <Sparkles className="w-10 h-10 text-[#7C5CD6]" />
+                <p className="mt-4 font-serif text-2xl text-[#141226]">Character illustration</p>
+                <p className="mt-2 text-sm text-[#4B4766]">Add /public/assets/profile/character-suit.webp</p>
+              </div>
+            )}
+
+            <div className="absolute top-2 right-0 z-20 w-28 h-28 rounded-full bg-white shadow-lg flex items-center justify-center text-center p-3" aria-label={personalInfo.availabilityTag}>
+              <div>
+                <span className="block w-2.5 h-2.5 mx-auto rounded-full bg-[#33D770]" aria-hidden="true" />
+                <span className="block mt-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[#141226] leading-tight">{personalInfo.availabilityTag}</span>
+              </div>
             </div>
           </div>
-          <a href="#about" className="hidden md:inline-flex shrink-0 items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#B9A6E6]">
-            Scroll <ArrowDownRight className="w-4 h-4" />
-          </a>
         </div>
       </div>
     </section>
