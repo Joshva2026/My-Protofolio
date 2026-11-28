@@ -25,6 +25,10 @@ export default function IntroSection() {
 
   return (
     <section id="intro" className="relative h-[100svh] w-full overflow-hidden bg-[#141A3D] text-white">
+      {/* Phones: the video fits the whole frame (letterboxed); desktop: it fills the screen */}
+      {/* Phones only: blurred poster fills the space around the letterboxed video */}
+      <img src={INTRO_POSTER} alt="" aria-hidden="true" className="sm:hidden absolute inset-0 h-full w-full object-cover scale-110 blur-2xl opacity-60" />
+
       <video
         ref={videoRef}
         src={INTRO_VIDEO}
@@ -37,7 +41,7 @@ export default function IntroSection() {
           const v = e.currentTarget;
           setProgress(v.duration ? v.currentTime / v.duration : 0);
         }}
-        className="absolute inset-0 h-full w-full object-cover"
+        className="absolute inset-0 h-full w-full object-contain object-[50%_35%] sm:object-cover sm:object-[50%_30%]"
       />
 
       {/* Legibility for the controls */}
